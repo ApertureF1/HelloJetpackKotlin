@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Jetpack-Navigation</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="second_fragment">second_fragment</string>
     <string name="first_fragment">first_fragment</string>
 </resources>
