@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.example.navigation.util.Request
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
 
 /**
  * A simple [Fragment] subclass.
@@ -33,7 +37,13 @@ class FirstFragment : Fragment() {
         Log.i("test", "firstFragment onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
         val button = view.findViewById<Button>(R.id.button)
-        button?.setOnClickListener { findNavController().navigate(R.id.action_firstFragment_to_secondFragment) }
+        button?.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+            doAsync {
+                Request("https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1").run()
+                uiThread { activity?.longToast("request performed!") }
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

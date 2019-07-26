@@ -13,6 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
+            app:navGraph="@navigation/nav_graph" tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="16dp"/>
+    <TextView
+            android:layout_width="115dp"
+            android:layout_height="51dp"
+            android:id="@+id/message"
+            app:layout_constraintTop_toTopOf="@+id/my_nav_host_fragment" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/my_nav_host_fragment"
+            app:layout_constraintVertical_bias="0.133" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"/>
 
 </android.support.constraint.ConstraintLayout>
