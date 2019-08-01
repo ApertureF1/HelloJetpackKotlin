@@ -2,16 +2,31 @@ package com.example.navigation
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.example.navigation.adapter.CityAdapter
+import com.example.navigation.viewmodel.CityViewModel
+import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * A simple [Fragment] subclass.
  */
+
 class SecondFragment : Fragment() {
+
+    @Suppress("UNCHECKED_CAST")
+    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T = CityViewModel(requireActivity().application) as T
+        }).get(CityViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("test", "secondFragment onCreate()")
@@ -29,6 +44,9 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.i("test", "secondFragment onViewCreated()")
+        val adapter = CityAdapter()
+        recyclerView.adapter = adapter
+        viewModel.allCities.observe(this, Observer { adapter.submitList(it) })
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -66,6 +84,7 @@ class SecondFragment : Fragment() {
         Log.i("test", "secondFragment onDestroy()")
         super.onDestroy()
     }
+
     override fun onAttach(context: Context) {
         Log.i("test", "secondFragment onAttach()")
         super.onAttach(context)

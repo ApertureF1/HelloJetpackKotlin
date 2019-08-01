@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Jetpack-Navigation</string>
-    <string name="second_fragment">second_fragment</string>
     <string name="first_fragment">first_fragment</string>
+    <string name="button">Button</string>
 </resources>

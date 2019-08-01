@@ -2,13 +2,13 @@ package com.example.navigation
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
 import com.example.navigation.util.Request
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
@@ -38,7 +38,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val button = view.findViewById<Button>(R.id.button)
         button?.setOnClickListener {
-            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+            findNavController(view).navigate(R.id.action_firstFragment_to_secondFragment)
             doAsync {
                 Request("https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1").run()
                 uiThread { activity?.longToast("request performed!") }
